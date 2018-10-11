@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +48,7 @@ public class FormatController {
 	
 	//Insère un format d'image
 	@RequestMapping(value ="/format",  method=RequestMethod.POST)
-	Format create(@RequestBody Format f) {
+	Format create( Format f) {
 		f.setNom("SMALL");
 		return f;
 	}
@@ -69,7 +68,7 @@ public class FormatController {
 	
 	// Update un format d'image
 	@RequestMapping(value ="/format",  method=RequestMethod.PUT)
-	Format update(@RequestBody Format m) {
+	Format update( Format m) {
 		return m;
 	}
 	

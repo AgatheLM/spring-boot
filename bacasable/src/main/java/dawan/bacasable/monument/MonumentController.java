@@ -1,9 +1,11 @@
-package dawan.bacasable.controller;
+package dawan.bacasable.monument;
 
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -13,66 +15,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import dawan.bacaasable.monument.Monument;
-import dawan.bacaasable.monument.Point;
-
 
 @Controller
 @EnableAutoConfiguration
 public class MonumentController {
+	
+	
+	//En pratique la couche DAO n'est pas appelée directement par le controller mais passe par une couche service
+	@Autowired
+	MonumentRepository monumentRepository;
+	
 	
 
 	//@PostMapping(value ="/monument")
 	@RequestMapping(value ="/monument",  method=RequestMethod.POST)
 	@ResponseBody
 	Monument create(@RequestBody Monument m) {
-		m.setId(5);
-		return m;
+		Monument monumentSauvegarde = monumentRepository.save(m);
+		return monumentSauvegarde;
 	}
 	
 	@RequestMapping(value ="/monument/{id}",  method=RequestMethod.GET)
 	@ResponseBody
-	Monument find(@PathVariable(value="id", required=true) int id) {
-		Monument m= new Monument();
-		m.setNom("Tour Eiffel");
-		m.setDescription("c'est très haut");
-		m.setId(id);
-		m.setPosition(Arrays.asList(new Point(15.0,16.0),new Point(17.0,18.0)));
-		return m;
+	Optional<Monument> find(@PathVariable(value="id", required=true) int id) {
+		Optional<Monument> monumentDemande = monumentRepository.findById(id);
+		return monumentDemande;
 	}
 	
 	@RequestMapping(value ="/monument",  method=RequestMethod.PUT, consumes= {"application/json","application/xml"}, produces = {"application/json"})
 	@ResponseBody
 	Monument update(@RequestBody Monument m) {
-		return m;
+		Monument monumentModifie = monumentRepository.save(m);
+		return monumentModifie;
 	}
 	
 	
 	@RequestMapping(value ="/monument/{id}",  method=RequestMethod.DELETE)
 	@ResponseBody
 	Monument delete(@PathVariable(value="id", required=true) int id) {
-		Monument m= new Monument();
-		m.setNom("Tour Eiffel");
-		m.setDescription("c'est très haut");
-		m.setId(id);
-		m.setPosition(Arrays.asList(new Point(15.0,16.0),new Point(17.0,18.0)));
-		return m;
+		// Sur les optional, .get lève une exception si null, orElse(null) renvoie nul
+		Monument monumentDemande = monumentRepository.findById(id).orElse(null);
+		monumentRepository.delete(monumentDemande);
+		return monumentDemande;
 	}
 	
 	@RequestMapping(value ="/monuments")
 	@ResponseBody
-	List<Monument> findAll() {
-		Monument m1= new Monument();
-		m1.setNom("Tour Eiffel");
-		m1.setDescription("c'est très haut");
-		m1.setId(1);
-		m1.setPosition(Arrays.asList(new Point(15.0,16.0),new Point(17.0,18.0)));
-		Monument m2= new Monument();
-		m2.setNom("Arc de triomphe");
-		m2.setDescription("c'est une porte");
-		m2.setId(2);
-		m2.setPosition(Arrays.asList(new Point(16.0,15.0),new Point(18.0,17.0)));
-		return Arrays.asList(m1,m2);
+	Iterable<Monument> findAll() {
+		return monumentRepository.findAll();
+
 	}
 	
 
