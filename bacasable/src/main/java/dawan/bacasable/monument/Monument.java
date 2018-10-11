@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Monument {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	private String nom;
 	private String description;
 	//Permet de créer et supprimer en cascade
@@ -26,10 +26,10 @@ public class Monument {
 	private List<Point> position;
 	
 	// GETTERS et SETTERS
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNom() {

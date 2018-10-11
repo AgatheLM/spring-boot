@@ -3,18 +3,27 @@ package dawan.filrouge.modele;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Format {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name="Formats")
+public class Format {
+	@Id
 	private String nom;
 	private String extension;
 	private String mimeType;
-	private Map<String,String> proprietes= new HashMap<>() ;
+	private HashMap<String,String> proprietes= new HashMap<>() ;
 	
 	// Constructeurs
 	public Format() {
 		super();
 	}
-	public Format(String nom, String extension, String mimeType, Map<String, String> proprietes) {
+	public Format(String nom, String extension, String mimeType, HashMap<String, String> proprietes) {
 		super();
 		this.nom = nom;
 		this.extension = extension;
@@ -50,7 +59,7 @@ public class Format {
 	public Map<String, String> getProprietes() {
 		return proprietes;
 	}
-	public void setProprietes(Map<String, String> proprietes) {
+	public void setProprietes(HashMap<String, String> proprietes) {
 		this.proprietes = proprietes;
 	}
 	
