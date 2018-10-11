@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>dawan</groupId>
-	<artifactId>bacasable</artifactId>
+	<artifactId>filrouge</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>bacasable</name>
+	<name>filrouge</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -37,7 +37,7 @@
 		</dependency>
 	</dependencies>
 
-	 <!-- permet de créer le jar avec toutes les dépendances, directement executable -->
+ <!-- permet de créer le jar avec toutes les dépendances, directement executable -->
 	<build>
 		<plugins>
 			<plugin>
