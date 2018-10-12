@@ -1,23 +1,23 @@
 package dawan.filrouge.modele;
 
 import java.util.HashMap;
-import java.util.Map;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="Formats")
 public class Format {
+	
+	@Column(length=100)
 	@Id
 	private String nom;
 	private String extension;
 	private String mimeType;
-	private HashMap<String,String> proprietes= new HashMap<>() ;
+	private HashMap<String,String> proprietes= new HashMap<String,String>() ;
 	
 	// Constructeurs
 	public Format() {
@@ -56,7 +56,7 @@ public class Format {
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
 	}
-	public Map<String, String> getProprietes() {
+	public HashMap<String, String> getProprietes() {
 		return proprietes;
 	}
 	public void setProprietes(HashMap<String, String> proprietes) {
